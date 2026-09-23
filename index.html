@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SheetGuard — Free Excel Auditor</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><div class="logo">SG</div><div><b>SheetGuard</b><small>Free Excel Auditor</small></div></div>
+    <nav><a href="#dashboard">Dashboard</a><a href="#findings">Findings</a><a href="#about">How it works</a></nav>
+    <button id="themeBtn" class="ghost">☾</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <span class="eyebrow">REAL WORKBOOK ANALYSIS</span>
+        <h1>Audit your Excel.<br><span>Understand the risk.</span></h1>
+        <p>Upload an Excel workbook and SheetGuard analyzes it directly in your browser. Your file is not uploaded to a server.</p>
+        <label class="uploadBtn">
+          <input id="fileInput" type="file" accept=".xlsx,.xls,.xlsm">
+          <span>⬆ Choose Excel workbook</span>
+        </label>
+        <p class="privacy">🔒 Local browser processing · No account · No paid API</p>
+      </div>
+      <div class="heroCard">
+        <div class="cardTitle">Audit pipeline</div>
+        <div class="pipeline"><span>Workbook</span><i>→</i><span>Parse</span><i>→</i><span>Audit</span><i>→</i><span>Score</span></div>
+        <div class="miniGrid">
+          <div><small>Sheets</small><b id="heroSheets">—</b></div>
+          <div><small>Formulas</small><b id="heroFormulas">—</b></div>
+          <div><small>Findings</small><b id="heroFindings">—</b></div>
+          <div><small>Score</small><b id="heroScore">—</b></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="dashboard" class="section">
+      <div class="sectionHead"><div><span class="eyebrow">DASHBOARD</span><h2>Workbook health</h2></div><button id="exportBtn" class="primary" disabled>Export findings CSV</button></div>
+      <div id="empty" class="empty">Upload an Excel workbook to begin a real audit.</div>
+      <div id="dashboardContent" hidden>
+        <div class="stats">
+          <div class="stat"><small>Health score</small><strong id="score">—</strong><span id="riskLabel">—</span></div>
+          <div class="stat"><small>Sheets</small><strong id="sheets">—</strong></div>
+          <div class="stat"><small>Formulas inspected</small><strong id="formulas">—</strong></div>
+          <div class="stat"><small>Findings</small><strong id="findingsCount">—</strong></div>
+          <div class="stat"><small>Critical / High</small><strong id="criticalHigh">—</strong></div>
+        </div>
+        <div class="grid2">
+          <div class="panel"><h3>Finding distribution</h3><div id="bars"></div></div>
+          <div class="panel"><h3>Workbook overview</h3><div id="overview"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="findings" class="section">
+      <div class="sectionHead"><div><span class="eyebrow">FINDINGS EXPLORER</span><h2>Issues found in the workbook</h2></div>
+        <div class="filters"><select id="severityFilter"><option>All</option><option>Critical</option><option>High</option><option>Medium</option><option>Low</option></select><input id="search" placeholder="Search cell, sheet, or description"></div>
+      </div>
+      <div class="tableWrap"><table><thead><tr><th>Severity</th><th>Type</th><th>Sheet</th><th>Cell</th><th>Description</th></tr></thead><tbody id="findingsBody"><tr><td colspan="5" class="muted">No audit yet.</td></tr></tbody></table></div>
+    </section>
+
+    <section id="about" class="section about">
+      <span class="eyebrow">HOW IT WORKS</span>
+      <h2>Deterministic first. AI optional later.</h2>
+      <p>SheetGuard calculates its score from actual workbook findings. It does not use a fixed demo score. Formula errors, suspicious hard-coded cells, duplicate rows, blank-heavy columns, and formula pattern breaks are derived from the uploaded workbook.</p>
+    </section>
+  </main>
+
+  <footer>SheetGuard Free · Client-side Excel audit · <span id="fileName">No workbook loaded</span></footer>
+
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
